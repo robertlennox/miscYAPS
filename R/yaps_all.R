@@ -15,7 +15,7 @@
 #' @param sync_model the sync model you generated with yaps
 #' @param rbi_min the minimum random burst interval of the transmitter
 #' @param rbi_max the maximum random burst interval of the transmitter
-#' @param transmitter_ID the ID of the transmitter you wanted to position
+#' @param transmitter_ID the ID of the transmitter you wanted to position MUST BE A FACTOR
 #' @param date the date that you wanted to position the tag on
 #' @param runs number of times to refit the model
 #' @export
@@ -30,7 +30,7 @@ yaps_all<-function(fish_detections, hydros, sync_model, rbi_min, rbi_max,
     dat <- yaps::applySync(toa=fish_detections %>% # sync model for one download
                              dplyr::filter(lubridate::date(.data$ts)==date) %>%
                              droplevels() %>%
-                             data.table::setDT %>%
+                             data.table::setDT() %>%
                              split(.$tag) %>%
                              purrr::pluck(transmitter_ID),
                            hydros=hydros,
