@@ -1,21 +1,28 @@
 Package: miscYAPS
-Title: What the Package Does (One Line, Title Case)
+Title: Miscellaneous data and helper functions for using YAPS
 Version: 0.0.0.9000
 Authors@R: 
-    person("First", "Last", , "first.last@example.com", role = c("aut", "cre"),
+    person("Robert", "Lennox", , "lennox@dal.ca", role = c("aut", "cre"),
            comment = c(ORCID = "YOUR-ORCID-ID"))
-Description: What the package does (one paragraph).
-License: `use_mit_license()`, `use_gpl3_license()` or friends to pick a
-    license
+Description: Provides a bit of data and helper functions for wrapping
+    around the key YAPS functions
+License: CC0
+Suggests: 
+    testthat (>= 3.0.0)
+Config/testthat/edition: 3
 Encoding: UTF-8
 Roxygen: list(markdown = TRUE)
 RoxygenNote: 7.2.3
-Depends: 
-    R (>= 2.10)
-LazyData: true
 Imports: 
-    dplyr,
-    lubridate,
+    cli (>= 3.6.0),
+    glue (>= 1.6.2),
+    lifecycle (>= 1.0.3),
+    rlang (>= 1.0.6),
+    withr (>= 2.5.0),
     purrr,
+    yaps,
+    dplyr,
     tidyr,
-    yaps
+    lubridate,
+    data.table, 
+    magrittr
