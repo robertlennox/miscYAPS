@@ -18,7 +18,7 @@
 #' @param transmitter_ID the ID of the transmitter you wanted to position
 #' @param date the date that you wanted to position the tag on
 #' @param runs number of times to refit the model
-#' @export yaps_all
+#' @export
 
 if(getRversion() >= "2.15.1")  utils::globalVariables(c("."))
 
