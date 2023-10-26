@@ -20,7 +20,7 @@ if(getRversion() >= "2.15.1")  utils::globalVariables(c("."))
 
 
 swim_yaps<-function(fish_detections, rbi_min, rbi_max, runs=5, silent=T){
-  yaps_all<-function (fish_detections, hydros, sync_model,
+  yaps_all<-function (fish_detections, hydros, sync_model, runs, rbi_min, rbi_max,
                       transmitter_ID, date)
   {
     tryCatch({
