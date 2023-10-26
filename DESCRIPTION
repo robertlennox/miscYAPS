@@ -10,7 +10,7 @@ Description: Provides a bit of data and helper functions for wrapping
     already available that is named sync_model and a data.table object for the hydrophones and their locations named
     hydros, as per the YAPS specifications. You should be familiar with YAPS in order to use this package but it will
     hopefully help make your life easier by looping through YAPS runs N (user specified number) of times and taking the
-    best fit among those runs for each fish day.
+    best fit among those runs for each fish day. You will also find some data in the package to help you try.
 License: CC0
 Suggests: 
     testthat (>= 3.0.0)
