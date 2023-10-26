@@ -9,8 +9,7 @@
 #' @import lubridate
 #' @import yaps
 #' @import purrr
-
-#' @param fish_detections the dataframe with the fish detections including epo and frac
+#' @param fish_detections the data frame with the fish detections including epo and frac
 #' @param rbi_min the minimum random burst interval of the transmitter
 #' @param rbi_max the maximum random burst interval of the transmitter
 #' @param runs number of times to refit the model, default is 5
