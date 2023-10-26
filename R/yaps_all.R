@@ -102,7 +102,7 @@ swim_yaps<-function(fish_detections, rbi_min, rbi_max, runs=5, silent=T){
     dplyr::mutate(i=c(1:nrow(.))) %>%
     dplyr::mutate(tag=factor(tag)) %>%
     split(.$i) %>%
-    purrr::map(., ~miscYAPS::yaps_all(transmitter_ID=.$tag, date=.$dt,
+    purrr::map(., ~yaps_all(transmitter_ID=.$tag, date=.$dt,
                                       runs=runs, rbi_min=rbi_min, rbi_max=rbi_max,
                                       fish_detections=fish_detections,
                                       hydros=hydros,
