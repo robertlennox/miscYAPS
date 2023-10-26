@@ -109,6 +109,4 @@ swim_yaps<-function(fish_detections, rbi_min, rbi_max, runs=5, silent=T){
                                       sync_model=sync_model)) %>%
     purrr::discard(is.na(.)) %>%
     bind_rows()
-
-  return(tr)
 }
