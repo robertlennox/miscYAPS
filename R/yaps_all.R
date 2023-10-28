@@ -90,4 +90,6 @@ swim_yaps<-function(fish_detections, runs, rbi_min, rbi_max){
     split(.$i) %>%
     purrr::map(., ~yaps_all(transmitter_ID=.$tag, date=.$dt, runs=runs, rbi_min, rbi_max)) %>%
     purrr::discard(is.na(.)) %>%
-    dplyr::bind_rows()}
+    dplyr::bind_rows()
+
+  beepr::beep(8)}
