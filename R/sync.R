@@ -18,18 +18,19 @@
 if(getRversion() >= "2.15.1")  utils::globalVariables(c("."))
 
 
-sync<-function(hydros, detections, ss_data, HOW_THIN=50, keep_rate=1){
+sync<-function(hydros, detections, ss_data, HOW_THIN=50, keep_rate=1, ss_data_what="data",
+               exclude_self_detections=T, fixed=c(1:nrow(.))){
 
   require(data.table)
   max_epo_diff=250
-  min_hydros=3
-  time_keeper_idx=4
-  fixed_hydros_idx=c(1:nrow(hydros))
+  min_hydros=2
+  time_keeper_idx=1
+  fixed_hydros_idx=fixed
   n_offset_day=2
   n_ss_day=2
   keep_rate=keep_rate
-  excl_self_detect=T
-  ss_data_what="data"
+  excl_self_detect=exclude_self_detections
+  ss_data_what=ss_data_what
 
   syncl<-list(hydros=hydros %>%
                 setDT,

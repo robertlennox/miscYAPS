@@ -20,7 +20,7 @@
 if(getRversion() >= "2.15.1")  utils::globalVariables(c("."))
 
 
-yaps_all<-function(transmitter_ID, date, runs, rbi_min, rbi_max){
+yaps_all<-function(transmitter_ID, date, runs, rbi_min, rbi_max, silent=T){
   tryCatch({
     dat <- applySync(toa=fish_detections %>% # sync model for one download
                        dplyr::filter(date(ts)==date) %>%
@@ -55,7 +55,7 @@ yaps_all<-function(transmitter_ID, date, runs, rbi_min, rbi_max){
                rbi_max=rbi_max,
                ss_data_what="est",
                bbox=NULL),
-        silent=F,
+        silent=silent,
         tmb_smartsearch=TRUE,
         maxIter=5000)},
         error=function(e){NA})}
@@ -81,7 +81,7 @@ yaps_all<-function(transmitter_ID, date, runs, rbi_min, rbi_max){
     error=function(e){NA})
 }
 
-swim_yaps<-function(fish_detections=fish_detections, runs, rbi_min, rbi_max){
+swim_yaps<-function(fish_detections, runs, rbi_min, rbi_max){
   fish_detections  %>%
     dplyr::count(dt=date(ts), tag) %>%
     dplyr::filter(n>50) %>%
