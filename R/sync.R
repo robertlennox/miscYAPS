@@ -17,7 +17,7 @@
 
 if(getRversion() >= "2.15.1")  utils::globalVariables(c("."))
 
-fixed=c(1:30)
+fixed=NULL
 
 sync<-function(hydros, detections, ss_data, HOW_THIN=50, keep_rate=1, ss_data_what="data",
                exclude_self_detections=T, fixed=fixed){
