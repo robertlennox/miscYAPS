@@ -2,6 +2,7 @@
 
 export(swim_yaps)
 export(yaps_all)
+export(fixed)
 export(sync)
 import(data.table)
 import(dplyr)
