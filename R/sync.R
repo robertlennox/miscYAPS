@@ -17,9 +17,10 @@
 
 if(getRversion() >= "2.15.1")  utils::globalVariables(c("."))
 
+fixed=1:nrow(hydros)
 
 sync<-function(hydros, detections, ss_data, HOW_THIN=50, keep_rate=1, ss_data_what="data",
-               exclude_self_detections=T, fixed=c(1:nrow(.))){
+               exclude_self_detections=T, fixed=fixed){
 
   require(data.table)
   max_epo_diff=250
