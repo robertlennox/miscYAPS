@@ -82,7 +82,7 @@ yaps_all<-function(transmitter_ID, date, runs, rbi_min, rbi_max, silent=T){
 }
 
 swim_yaps<-function(fish_detections, runs, rbi_min, rbi_max){
-  fish_detections  %>%
+  tr<-fish_detections  %>%
     dplyr::count(dt=date(ts), tag) %>%
     dplyr::filter(n>50) %>%
     dplyr::mutate(i=c(1:nrow(.))) %>%
@@ -92,4 +92,5 @@ swim_yaps<-function(fish_detections, runs, rbi_min, rbi_max){
     purrr::discard(is.na(.)) %>%
     dplyr::bind_rows()
 
-  beepr::beep(8)}
+  beepr::beep(8)
+  return(tr)}
