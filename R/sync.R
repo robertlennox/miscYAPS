@@ -8,6 +8,7 @@
 #' @import lubridate
 #' @import yaps
 #' @import purrr
+#' @import gridExtra
 #' @param hydros the hydrophone data frame as a data.table
 #' @param detections a data.table of the sync tag detections
 #' @param ss_data a data.table of the speed of sound data formatted using yaps::tempToSs
@@ -51,7 +52,17 @@ synccoverage<-function (inp_sync, plot = FALSE)
                              colors = c("red", "orange", "yellow", "green"))+
       guides(colour=F)+
       scale_size_continuous(range=c(5, 7))
-    print(p)
+
+    q<-sync_coverage %>%
+      dplyr::rename(idx=h) %>%
+      left_join(hydros) %>%
+      ggplot(aes(offset_idx, N, colour=factor(serial)))+
+      geom_point(position="jitter")+
+      geom_smooth(se=F)+
+      theme_classic()+
+      theme(legend.position="top", text=element_text(size=18))+
+      labs(x="Offset time", y="Number", colour="Serial")
+    print(gridExtra::grid.arrange(p, q))
   }
   return(sync_coverage)
 }
