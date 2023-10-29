@@ -21,7 +21,7 @@ if(getRversion() >= "2.15.1")  utils::globalVariables(c("."))
 
 fixed=NULL
 
-synccoverage<-function (inp_sync)
+synccoverage<-function (inp_sync, hydros)
 {
   toa <- inp_sync$dat_tmb_sync$toa
   nh <- ncol(toa)
