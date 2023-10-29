@@ -21,7 +21,7 @@ if(getRversion() >= "2.15.1")  utils::globalVariables(c("."))
 
 fixed=NULL
 
-synccoverage<-function (inp_sync, plot = FALSE)
+synccoverage<-function (inp_sync)
 {
   toa <- inp_sync$dat_tmb_sync$toa
   nh <- ncol(toa)
@@ -32,7 +32,6 @@ synccoverage<-function (inp_sync, plot = FALSE)
   sync_coverage <- data.table::data.table(reshape2::melt(with(toa_long[!is.na(toa)],
                                                               table(h, offset_idx))))
   colnames(sync_coverage) <- c("h", "offset_idx", "N")
-  if (plot) {
     p<-sync_coverage %>%
       dplyr::rename(idx=h) %>%
       left_join(hydros) %>%
@@ -63,8 +62,6 @@ synccoverage<-function (inp_sync, plot = FALSE)
       theme(legend.position="top", text=element_text(size=18))+
       labs(x="Offset time", y="Number", colour="Serial")
     print(gridExtra::grid.arrange(p, q))
-  }
-  return(sync_coverage)
 }
 
 
