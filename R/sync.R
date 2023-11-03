@@ -67,7 +67,7 @@ synccoverage<-function (inp_sync, hydros, map){
 }
 
 sync<-function(hydros, detections, ss_data, HOW_THIN=50, keep_rate=1, ss_data_what="data",
-               exclude_self_detections=T, fixed=fixed, timekeeper=1){
+               exclude_self_detections=T, fixed=fixed, timekeeper=1, map){
 
   require(data.table)
   max_epo_diff=250
