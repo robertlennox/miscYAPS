@@ -6,7 +6,7 @@
 \alias{miscYAPS-package}
 \title{miscYAPS: Miscellaneous data and helper functions for using YAPS}
 \description{
-Provides a bit of data and helper functions for wrapping around the key YAPS functions
+Provides a bit of data and helper functions for wrapping around the key YAPS functions. The main function is swim_yaps, which will allow you to pass a data.table that is formatted with columns ts, epo, frac, tag, serial to the function. You must have a synchronisation model already available that is named sync_model and a data.table object for the hydrophones and their locations named hydros, as per the YAPS specifications. You should be familiar with YAPS in order to use this package but it will hopefully help make your life easier by looping through YAPS runs N (user specified number) of times and taking the best fit among those runs for each fish day. You will also find some data in the package to help you try.
 }
 \author{
 \strong{Maintainer}: Robert Lennox \email{lennox@dal.ca} (\href{https://orcid.org/YOUR-ORCID-ID}{ORCID})
