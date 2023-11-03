@@ -99,7 +99,7 @@ sync<-function(hydros, detections, ss_data, HOW_THIN=50, keep_rate=1, ss_data_wh
                          silent_check=F,
                          ss_data_what=ss_data_what)
 
-  synccoverage(inp_sync, hydros)
+  synccoverage(inp_sync, hydros, map)
 
   sync_model_0 <- sync_model_1 <- sync_model_2 <- sync_model_3 <- sync_model_4 <- NULL
   sync_model_0 <- getSyncModel(inp_sync, silent=TRUE, max_iter=1000, tmb_smartsearch = TRUE)
