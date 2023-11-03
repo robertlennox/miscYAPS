@@ -31,7 +31,7 @@ synccoverage<-function (inp_sync, hydros){
   sync_coverage <- data.table::data.table(reshape2::melt(with(toa_long[!is.na(toa)],
                                                               table(h, offset_idx))))
   colnames(sync_coverage) <- c("h", "offset_idx", "N")
-    p<-map+
+    p<-ggplot()+
       ggplot2::geom_point(data=
                    sync_coverage %>%
                      dplyr::rename(idx = h) %>%
