@@ -15,14 +15,14 @@
 #' @param HOW_THIN is the number for the eps_threshold.. smaller makes a thinner distribution default is 50
 #' @param keep_rate what proportion of sync tag detections do you want to retain, default is 1 (100%)
 #' @param timekeeper is the idx of the most perfectly fixed hydrophone; refer to hydros data.table for idx numbers
+#' @param map is a map of your study area
 #' @export
 
 if(getRversion() >= "2.15.1")  utils::globalVariables(c("."))
 
 fixed=NULL
 
-synccoverage<-function (inp_sync, hydros)
-{
+synccoverage<-function (inp_sync, hydros, map){
   toa <- inp_sync$dat_tmb_sync$toa
   nh <- ncol(toa)
   offset_idx <- inp_sync$dat_tmb_sync$offset_idx
@@ -32,39 +32,39 @@ synccoverage<-function (inp_sync, hydros)
   sync_coverage <- data.table::data.table(reshape2::melt(with(toa_long[!is.na(toa)],
                                                               table(h, offset_idx))))
   colnames(sync_coverage) <- c("h", "offset_idx", "N")
-    p<-sync_coverage %>%
-      dplyr::rename(idx=h) %>%
-      left_join(hydros) %>%
-      group_by(serial, x, y, idx) %>%
-      dplyr::summarise(m=mean(N)) %>%
-      mutate(col=case_when(m<50 & m>10 ~ 50,
-                           m<=10 & m>5 ~ 10,
-                           m<=5 ~ 5,
-                           m>=50 ~ 100)) %>%
-      ggplot(aes(x, y, size=m, colour=col, label=paste0(serial, " idx #", idx)))+
-      geom_point()+
-      theme_classic()+
-      geom_text(colour="red", size=4)+
-      labs(x="UTM X", y="UTM Y", size="mean offset")+
-      theme(legend.position="top", text=element_text(size=18))+
-      scale_colour_gradientn(breaks = c(5, 10, 50, 100),
+    p<-map+
+      ggplot2::geom_point(data=
+                   sync_coverage %>%
+                     dplyr::rename(idx = h) %>%
+                     left_join(hydros) %>%
+                     group_by(serial, x, y, idx) %>%
+                     dplyr::summarise(m = mean(N)) %>%
+                     mutate(col = case_when(m < 50 & m > 10 ~ 50,
+                                            m <= 10 & m > 5 ~ 10,
+                                            m <= 5 ~ 5,
+                                            m >= 50 ~ 100)),
+                   aes(x, y, size=m, colour=col, label=paste0(serial, " idx #", idx)))+
+      ggplot2::geom_point()+
+      ggplot2::theme_classic()+
+      ggplot2::geom_text(colour="red", size=4)+
+      ggplot2::labs(x="UTM X", y="UTM Y", size="mean offset")+
+      ggplot2::theme(legend.position="top", text=element_text(size=18))+
+      ggplot2::scale_colour_gradientn(breaks = c(5, 10, 50, 100),
                              colors = c("red", "orange", "yellow", "green"))+
       guides(colour=F)+
-      scale_size_continuous(range=c(5, 7))
+      ggplot2::scale_size_continuous(range=c(5, 7))
 
     q<-sync_coverage %>%
       dplyr::rename(idx=h) %>%
-      left_join(hydros) %>%
-      ggplot(aes(offset_idx, N, colour=factor(serial)))+
-      geom_point(position="jitter")+
-      geom_smooth(se=F)+
-      theme_classic()+
-      theme(legend.position="top", text=element_text(size=18))+
-      labs(x="Offset time", y="Number", colour="Serial")
+      dplyr::left_join(hydros) %>%
+      ggplot2::ggplot(aes(offset_idx, N, colour=factor(serial)))+
+      ggplot2::geom_point(position="jitter")+
+      ggplot2::geom_smooth(se=F)+
+      ggplot2::theme_classic()+
+      ggplot2::theme(legend.position="top", text=element_text(size=18))+
+      ggplot2::labs(x="Offset time", y="Number", colour="Serial")
     print(gridExtra::grid.arrange(p, q))
 }
-
-
 
 sync<-function(hydros, detections, ss_data, HOW_THIN=50, keep_rate=1, ss_data_what="data",
                exclude_self_detections=T, fixed=fixed, timekeeper=1){
