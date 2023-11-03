@@ -3,7 +3,7 @@ Title: Miscellaneous data and helper functions for using YAPS
 Version: 0.0.0.9000
 Authors@R: 
     person("Robert", "Lennox", , "lennox@dal.ca", role = c("aut", "cre"),
-           comment = c(ORCID = "YOUR-ORCID-ID"))
+           comment = c(ORCID = "0000-0003-1010-0577"))
 Description: Provides a bit of data and helper functions for wrapping
     around the key YAPS functions. The main function is swim_yaps, which will allow you to pass a data.table 
     that is formatted with columns ts, epo, frac, tag, serial to the function. You must have a synchronisation model
@@ -19,6 +19,7 @@ Encoding: UTF-8
 Roxygen: list(markdown = TRUE)
 RoxygenNote: 7.2.3
 Imports: 
+    beepr,
     cli (>= 3.6.0),
     glue (>= 1.6.2),
     lifecycle (>= 1.0.3),
@@ -31,6 +32,8 @@ Imports:
     lubridate,
     data.table, 
     magrittr
+Remotes:
+    baktoft/yaps
 Depends: 
     R (>= 2.10)
 LazyData: true
