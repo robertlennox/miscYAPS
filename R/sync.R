@@ -43,7 +43,8 @@ synccoverage<-function (inp_sync, hydros, map){
                                             m <= 10 & m > 5 ~ 10,
                                             m <= 5 ~ 5,
                                             m >= 50 ~ 100)),
-                   aes(x, y, size=m, colour=col, label=paste0(serial, " idx #", idx)))+
+                   aes(x, y, size=m, colour=col, label=paste0(serial, " idx #", idx)),
+                   inherit.aes=F)+
       ggplot2::geom_point()+
       ggplot2::theme_classic()+
       ggplot2::geom_text(colour="red", size=4)+
