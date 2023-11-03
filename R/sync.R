@@ -15,14 +15,13 @@
 #' @param HOW_THIN is the number for the eps_threshold.. smaller makes a thinner distribution default is 50
 #' @param keep_rate what proportion of sync tag detections do you want to retain, default is 1 (100%)
 #' @param timekeeper is the idx of the most perfectly fixed hydrophone; refer to hydros data.table for idx numbers
-#' @param map is a map of your study area
 #' @export
 
 if(getRversion() >= "2.15.1")  utils::globalVariables(c("."))
 
 fixed=NULL
 
-synccoverage<-function (inp_sync, hydros, map){
+synccoverage<-function (inp_sync, hydros){
   toa <- inp_sync$dat_tmb_sync$toa
   nh <- ncol(toa)
   offset_idx <- inp_sync$dat_tmb_sync$offset_idx
@@ -44,7 +43,7 @@ synccoverage<-function (inp_sync, hydros, map){
                                             m <= 5 ~ 5,
                                             m >= 50 ~ 100)),
                    aes(x, y, size=m, colour=col, label=paste0(serial, " idx #", idx)),
-                   inherit.aes=F)+
+                   inherit.aes=)+
       ggplot2::geom_point()+
       ggplot2::theme_classic()+
       ggplot2::geom_text(colour="red", size=4)+
@@ -68,7 +67,7 @@ synccoverage<-function (inp_sync, hydros, map){
 }
 
 sync<-function(hydros, detections, ss_data, HOW_THIN=50, keep_rate=1, ss_data_what="data",
-               exclude_self_detections=T, fixed=fixed, timekeeper=1, map){
+               exclude_self_detections=T, fixed=fixed, timekeeper=1){
 
   require(data.table)
   max_epo_diff=250
@@ -100,7 +99,7 @@ sync<-function(hydros, detections, ss_data, HOW_THIN=50, keep_rate=1, ss_data_wh
                          silent_check=F,
                          ss_data_what=ss_data_what)
 
-  synccoverage(inp_sync, hydros, map)
+  synccoverage(inp_sync, hydros)
 
   sync_model_0 <- sync_model_1 <- sync_model_2 <- sync_model_3 <- sync_model_4 <- NULL
   sync_model_0 <- getSyncModel(inp_sync, silent=TRUE, max_iter=1000, tmb_smartsearch = TRUE)
