@@ -2,15 +2,12 @@
 
 export(swim_yaps)
 export(sync)
-<<<<<<< HEAD
 export(synccoverage)
 export(syncgrid)
 export(transmits)
 export(errorplot)
-=======
 export(yaps_all)
 import(beepr)
->>>>>>> 1a575de336c4eace6d5476a054ca6d830943b125
 import(data.table)
 import(dplyr)
 import(gridExtra)
