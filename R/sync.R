@@ -51,7 +51,7 @@ synccoverage<-function (inp_sync, hydros){
       ggplot2::theme(legend.position="top", text=element_text(size=18))+
       ggplot2::scale_colour_gradientn(breaks = c(5, 10, 50, 100),
                              colors = c("red", "orange", "yellow", "green"))+
-      guides(colour=F)+
+      guides(colour="none")+
       ggplot2::scale_size_continuous(range=c(5, 7))
 
     q<-sync_coverage %>%
