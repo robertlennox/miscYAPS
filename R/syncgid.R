@@ -28,7 +28,7 @@ syncgrid<-function(hydros=hydros, sync_model=sync_model){
     dplyr::mutate(dist=sqrt(i+j)) %>%
     dplyr::group_by(serial, sync_tag, dist, x, y,sx, sy) %>%
     dplyr::summarise(E=mean(E)) %>%
-    ggplot2::ggplot(aes(sync_tag %>% factor, serial %>% factor, fill=E, label=round(dist)))+
+    ggplot2::ggplot(aes(sync_tag %>% factor, serial %>% factor, fill=E, label=paste(round(dist), "metres apart")))+
     ggplot2::geom_tile()+
     ggplot2::scale_fill_gradientn(colours=c("purple", "yellow", "green", "yellow", "purple"))+
     ggplot2::theme_classic()+
