@@ -31,7 +31,8 @@ Imports:
     tidyr,
     lubridate,
     data.table, 
-    magrittr
+    magrittr,
+    gridExtra
 Remotes:
     baktoft/yaps
 Depends: 
